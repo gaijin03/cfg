@@ -124,7 +124,7 @@ autocmd Filetype gitcommit syn match   gitcommitSummary	"^.\{0,72\}" contained c
 autocmd Filetype gitcommit hi def link gitcommitSummary		Keyword
 "autocmd Filetype expect setlocal tw=0
 
-autocmd FileType python,sh,lua
+autocmd FileType python,sh,lua,conf,tf
     \ setlocal tabstop=4       |
     \ setlocal softtabstop=4   |
     \ setlocal shiftwidth=4    |
@@ -201,6 +201,8 @@ if has("gui_running")
     :set lines=60
     :set columns=180
     set cc=81
+    "set list listchars=tab:>-,trail:~,extends:>,precedes:<
+    "set list listchars=tab:>-,trail:~,extends:>,precedes:<,space:␣
   endif
 endif
 

@@ -1,0 +1,51 @@
+[user]
+	email = brian@schedmd.com
+	name = Brian Christiansen
+[github]
+	user = gaijin03
+[branch]
+        autosetuprebase = always
+	rebase = true
+[push]
+	default = simple
+[rebase]
+	stat = true
+
+[alias]
+	st      = status
+[pager]
+	blame = vim -
+[core]
+	excludesfile = /home/brian/.gitignore_global
+
+[diff]
+	tool = vimdiff
+	guitool = gvimdiff
+
+#[difftool "vimdiff"]
+#	cmd = "vimdiff -f -d -c 'cd $GIT_PREFIX' $REMOTE $LOCAL"
+#[difftool "gvimdiff"]
+#	cmd = "gvimdiff -f -d -c 'cd $GIT_PREFIX' $REMOTE $LOCAL"
+
+[difftool "vimdiff"]
+	cmd = "vimdiff -f -d -c 'cd $GIT_PREFIX' $LOCAL $REMOTE"
+[difftool "gvimdiff"]
+	cmd = "gvimdiff -f -d -c 'cd $GIT_PREFIX' $LOCAL $REMOTE"
+
+[difftool]
+	prompt = false
+[gui]
+	commitmsgwidth = 72
+[format]
+	pretty = fuller
+[merge]
+	tool = vimdiff
+#	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[am]
+	threeWay = true
+
+#[showbranch]
+#	default = --topo-order
+#	default = heads/*

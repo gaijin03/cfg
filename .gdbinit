@@ -8,6 +8,7 @@ set print pretty on
 set print null-stop on
 set print elements 2000
 
+handle SIGUSR1 nostop noprint
 
 define lock
 set scheduler-locking on
@@ -149,4 +150,15 @@ define print_chain
     p $ptr->acct
     set $pptr = &$pptr->assoc_next
   end
+end
+
+
+define print_preemptees
+   set $curr_node = preemptee_candidates->head
+
+   while $curr_node
+     set $curr_job = (struct job_record *)$curr_node->data
+     p $curr_job->job_id
+     set $curr_node = $curr_node->next
+   end
 end
