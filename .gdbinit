@@ -62,6 +62,29 @@ define find_node
    end
 end
 
+define find_part
+   set $curr_node = part_list->head
+   set $part = (part_record_t *)part_list->head->data
+   set $found = 0
+
+   while !$found && $curr_node
+     if (!xstrcmp($part.name, $arg0))
+       p $part->name
+       p $arg0
+       p "YO!"
+       set $found = 1
+     else
+       set $curr_node = $curr_node->next
+       set $part = (part_record_t *)$curr_node->data
+     end
+   end
+
+   if $found
+     p "Found it!"
+   else
+     p "Didn't find it!"
+   end
+end
 
 define find_fed_job
    set $curr_node = fed_job_list->head
