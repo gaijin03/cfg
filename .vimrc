@@ -19,14 +19,13 @@ noremap g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
 "Syntax highlighting - figures out highliging when opening files like with .c
 syntax on
 
-color darkblue
-"color desert
-"if (&diff)
-"    color desert
-"else
-"    "My favorite color scheme
-"    color darkblue
-"endif
+"color darkblue
+if &diff && !has("gui_running")
+    color desert
+else
+    "My favorite color scheme
+    color darkblue
+endif
 
 
 "Change spelling colors
