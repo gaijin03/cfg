@@ -1,1 +1,1 @@
---leak-check=yes --num-callers=32 -v --max-stackframe=222261561 --main-stacksize=222261561
+--leak-check=full --num-callers=32 -v --max-stackframe=222261561 --main-stacksize=222261561 --log-file=valgrind-%p.out
