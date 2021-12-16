@@ -3,9 +3,6 @@
 	name = Brian Christiansen
 [github]
 	user = gaijin03
-[branch]
-        autosetuprebase = always
-	rebase = true
 [push]
 	default = simple
 [rebase]
@@ -49,3 +46,5 @@
 #[showbranch]
 #	default = --topo-order
 #	default = heads/*
+[pull]
+	rebase = merges
