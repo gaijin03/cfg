@@ -48,3 +48,5 @@
 #	default = heads/*
 [pull]
 	rebase = merges
+[init]
+	templateDir = /home/brian/.git-template
