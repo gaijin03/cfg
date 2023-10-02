@@ -20,18 +20,23 @@ noremap g* :let @/ = expand('<cword>')\|set hlsearch<C-M>
 syntax on
 
 "color darkblue
-if &diff && !has("gui_running")
-    color desert
-else
-    "My favorite color scheme
-    color darkblue
-endif
+"if &diff && !has("gui_running")
+"    color darkblue
+"else
+"    "My favorite color scheme
+"    "color darkblue
+"endif
 
+
+" https://github.com/vim/vim/issues/2424
+set t_Cs=
 
 "Change spelling colors
-"hi clear SpellBad
-"hi SpellBad cterm=undercurl,bold
-"hi SpellBad ctermfg=red
+hi clear SpellBad
+hi SpellBad gui=undercurl,bold
+hi SpellBad guifg=red
+hi SpellBad cterm=undercurl,bold
+hi SpellBad ctermfg=red
 
 "Really write out whether I have permissions
 cmap w!! !sudo tee %
@@ -121,6 +126,7 @@ map <silent> <F3> :echo ShowWhiteSpace()<CR>
 autocmd Filetype gitcommit setlocal tw=72
 autocmd Filetype gitcommit syn match   gitcommitSummary	"^.\{0,72\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
 autocmd Filetype gitcommit hi def link gitcommitSummary		Keyword
+autocmd Filetype gitcommit set spell
 "autocmd Filetype expect setlocal tw=0
 
 autocmd FileType python,sh,lua,conf,tf
@@ -142,6 +148,10 @@ autocmd FileType c,cpp,expect
     \ setlocal noexpandtab         |
     \ setlocal tw=80               |
     \ setlocal cinoptions=(0,u0,U0 | " Slurm indentation
+
+autocmd FileType nroff,html
+    \ setlocal spell
+
 
 " Remove trailing white space at the end when writing
 "autocmd BufWritePre * %s/\s\+$//e
@@ -196,6 +206,7 @@ map <silent> <F2> :echo FunctionName()<CR>
 
 "expands gvim to the full screen size for vdiffer
 if has("gui_running")
+  color darkblue
   if (&diff)
     :set lines=60
     :set columns=180
