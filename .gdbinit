@@ -8,6 +8,8 @@ set print pretty on
 set print null-stop on
 set print elements 2000
 
+set debuginfod enabled off
+
 handle SIGUSR1 nostop noprint
 
 define lock
@@ -19,18 +21,18 @@ end
 
 define find_job
    set $curr_node = job_list->head
-   set $curr_job = (struct job_record *)job_list->head->data
+   set $job = (struct job_record *)job_list->head->data
    set $found = 0
 
    while !$found && $curr_node
-     if $curr_job->job_id == $arg0
-       p $curr_job->job_id
+     if $job->job_id == $arg0
+       p $job->job_id
        p $arg0
        p "YO!"
        set $found = 1
      else
        set $curr_node = $curr_node->next
-       set $curr_job = (struct job_record *)$curr_node->data
+       set $job = (struct job_record *)$curr_node->data
      end
    end
 
@@ -88,18 +90,18 @@ end
 
 define find_fed_job
    set $curr_node = fed_job_list->head
-   set $curr_job = (fed_job_info_t *)fed_job_list->head->data
+   set $job = (fed_job_info_t *)fed_job_list->head->data
    set $found = 0
 
    while !$found && $curr_node
-     if $curr_job->job_id == $arg0
-       p $curr_job->job_id
+     if $job->job_id == $arg0
+       p $job->job_id
        p $arg0
        p "YO!"
        set $found = 1
      else
        set $curr_node = $curr_node->next
-       set $curr_job = (fed_job_info_t *)$curr_node->data
+       set $job = (fed_job_info_t *)$curr_node->data
      end
    end
 
