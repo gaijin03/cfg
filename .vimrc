@@ -216,6 +216,10 @@ if has("gui_running")
   endif
 endif
 
+if (&diff)
+    set cc=81
+endif
+
 
 " Close buffer without closing split window
 " http://stackoverflow.com/a/8585343/839788
