@@ -9,7 +9,8 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+#set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -49,6 +50,7 @@ bindsym XF86AudioMicMute exec --no-startup-id qdbus org.kde.kglobalaccel /compon
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+#floating_modifier Mod1
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -56,6 +58,7 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -74,11 +77,16 @@ bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
+focus_wrapping no
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+bindsym $mod+Tab focus next sibling
+bindsym $mod+Shift+Tab focus prev sibling
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -120,10 +128,10 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:Spotify"
-set $ws2 "2:Gmail"
-set $ws3 "3:23.02"
-set $ws4 "4:23.11"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -155,17 +163,45 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+Control+Left workspace prev
-bindsym $mod+Control+Right workspace next
+#bindsym $mod+Control+Left workspace prev
+#bindsym $mod+Control+Right workspace next
+
+# https://github.com/i3/i3/issues/3900
+bindsym $mod+Control+Left exec /home/brian/.config/i3/scripts/change-workspace prev
+bindsym $mod+Control+Right exec /home/brian/.config/i3/scripts/change-workspace next
 
 bindsym $mod+Control+Shift+Left move container to workspace prev; workspace prev
 bindsym $mod+Control+Shift+Right move container to workspace next; workspace next
 
-exec --no-startup-id i3-msg "workspace 1; exec spotify"
-exec --no-startup-id i3-msg "workspace 2; exec google-chrome"
+#exec --no-startup-id i3-msg "workspace $ws1; exec spotify"
+#exec --no-startup-id i3-msg "workspace $ws2; exec google-chrome"
 
-exec --no-startup-id i3-msg "workspace 3; append_layout /home/brian/.i3/workspace-slurm.json"
-exec --no-startup-id i3-msg "workspace 4; append_layout /home/brian/.i3/workspace-slurm.json"
+#exec --no-startup-id i3-msg "workspace $ws3; append_layout /home/brian/.i3/workspace-slurm.json"
+##set $p1 "/home/brian/slurm/23.02"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws3; exec konsole --workdir $p1/lappy"
+#
+#exec --no-startup-id i3-msg "workspace $ws4; append_layout /home/brian/.i3/workspace-slurm.json"
+##set $p2 "/home/brian/slurm/23.11"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws4; exec konsole --workdir $p2/slurm"
+#
+#exec --no-startup-id i3-msg "workspace $ws5; append_layout /home/brian/.i3/workspace-slurm.json"
+##set $p3 "/home/brian/slurm/master"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/lappy"
+##exec_always --no-startup-id i3-msg "workspace $ws5; exec konsole --workdir $p3/slurm"
 
 
 
@@ -186,16 +222,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 1 px or 1 ppt
+        bindsym j resize grow width 1 px or 1 ppt
         bindsym k resize grow height 1 px or 1 ppt
         bindsym l resize shrink height 1 px or 1 ppt
-        bindsym semicolon resize grow width 1 px or 1 ppt
+        bindsym semicolon resize shrink width 1 px or 1 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Left resize grow width 1 px or 1 ppt
         bindsym Down resize grow height 1 px or 1 ppt
         bindsym Up resize shrink height 1 px or 1 ppt
-        bindsym Right resize grow width 1 px or 1 ppt
+        bindsym Right resize shrink width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -207,9 +243,9 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+#bar {
+#        status_command i3status
+#}
 
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
@@ -232,3 +268,13 @@ for_window [class="plasmashell" window_type="notification"] border none, move po
 no_focus [class="plasmashell" window_type="notification"]
 
 for_window [title="Desktop @ QRect.*"] kill; floating enable; border none
+
+for_window [class="konsole"] border normal
+
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
