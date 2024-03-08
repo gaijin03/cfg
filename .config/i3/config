@@ -278,3 +278,5 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# Don't focus window on mouse hove
+focus_follows_mouse no
